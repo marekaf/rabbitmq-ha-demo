@@ -14,7 +14,7 @@ $ HELM_RELEASE_NAME=my-release
 $ NAMESPACE=rabbit
 
 $ helm install \
-  --set rabbitmqUsername=admin,rabbitmqPassword=ultrasecretpassword,service.type=NodePort \
+  --set rabbitmqUsername=admin,rabbitmqPassword=ultrasecretpassword,service.type=NodePort,persistentVolume.enabled=true,persistentVolume.size=64Gi \
   --name "$HELM_RELEASE_NAME" stable/rabbitmq-ha
 ```
 # open up the management UI in your browser
@@ -58,4 +58,5 @@ Setting policy "ha-all" for pattern "." to "{"ha-mode":"all", "ha-sync-mode":"au
 (Warning: This will delete all the persistent data too!)
 ```
 helm del --purge $HELM_RELEASE_NAME
+kubectl delete pvc --all
 ```
