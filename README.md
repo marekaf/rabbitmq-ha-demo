@@ -10,11 +10,22 @@ $ helm install stable/rabbitmq-ha
 
 # customized deployment 
 ```
+$ kubectl create -f - <<EOF                                                                                                   kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: ssd
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+EOF
+storageclass "ssd" created
+```
+
+```
 $ HELM_RELEASE_NAME=my-release
 $ NAMESPACE=rabbit
-
 $ helm install \
-  --set rabbitmqUsername=admin,rabbitmqPassword=ultrasecretpassword,service.type=NodePort,persistentVolume.enabled=true,persistentVolume.size=64Gi \
+  --set rabbitmqUsername=admin,rabbitmqPassword=ultrasecretpassword,service.type=NodePort,persistentVolume.enabled=true,persistentVolume.storageClass=ssd,persistentVolume.size=64Gi \
   --name "$HELM_RELEASE_NAME" stable/rabbitmq-ha
 ```
 for more parameters check the Chart repo https://github.com/kubernetes/charts/tree/master/stable/rabbitmq-ha
