@@ -17,6 +17,7 @@ $ helm install \
   --set rabbitmqUsername=admin,rabbitmqPassword=ultrasecretpassword,service.type=NodePort,persistentVolume.enabled=true,persistentVolume.size=64Gi \
   --name "$HELM_RELEASE_NAME" stable/rabbitmq-ha
 ```
+for more parameters check the Chart repo https://github.com/kubernetes/charts/tree/master/stable/rabbitmq-ha
 # open up the management UI in your browser
 ```
 $ export NODE_IP=$( \
