@@ -10,7 +10,8 @@ $ helm install stable/rabbitmq-ha
 
 # customized deployment 
 ```
-$ kubectl create -f - <<EOF                                                                                                   kind: StorageClass
+$ kubectl create -f - <<EOF
+kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: ssd
